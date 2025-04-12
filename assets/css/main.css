@@ -1273,3 +1273,20 @@ section,
 .starter-section {
   /* Add your styles here */
 }
+
+.whats-app-btn{
+  position: fixed;
+  height: 60px;
+  width: 60px;
+  bottom: 20px;
+  left: 30px;
+  background: #04d735;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  color: #fff !important;
+  z-index:99999;
+  text-decoration: none;
+}
