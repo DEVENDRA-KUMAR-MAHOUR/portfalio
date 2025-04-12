@@ -39,51 +39,64 @@
 // ----------------------------new code----------------------------
 
 
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require '../assets/vendor/php-email-form/PHPMailer/src/Exception.php';
 require '../assets/vendor/php-email-form/PHPMailer/src/PHPMailer.php';
-require '../assets/vendor/php-email-form/PHPMailer/src/SMTP.php'; 
-
+require '../assets/vendor/php-email-form/PHPMailer/src/SMTP.php';
 
 $mail = new PHPMailer(true);
-$receiving_email_address = 'devendrk79@gmail.com';
 
-    $mail->isSMTP();                                          //Send using SMTP
-    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                 //Enable SMTP authentication
-    $mail->Username   = 'devendrk79@gmail.com';            //SMTP username
-    $mail->Password   = 'idpcyqokawrgfxbs';                   //SMTP password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;          //Enable implicit TLS encryption
-    $mail->Port       = 465;                                  //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+try {
+    // SMTP configuration
+    $mail->isSMTP();
+    $mail->Host       = 'smtp.gmail.com';
+    $mail->SMTPAuth   = true;
+    $mail->Username   = 'devendrk79@gmail.com';     // Your Gmail address
+    $mail->Password   = 'idpcyqokawrgfxbs';         // App password from Gmail
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+    $mail->Port       = 465;
 
-    //Recipients
+    // Sender and recipient
     $mail->setFrom('devendrk79@gmail.com', 'Lumina Holidays');
-    $mail->addBCC("devendrk79@gmail.com", "Digikolorz");
-    $mail->addBCC("devendrk79@gmail.com", "Lumina Holidays");
-    $mail->addAddress($email,$name);     //Add a recipient
-    $mail->to = $receiving_email_address;
-    $mail->from_name = $_POST['name'] ?? 'Anonymous';
-    $mail->from_email = $_POST['email'] ?? 'no-reply@example.com';
-    $mail->subject = $_POST['subject'] ?? 'New Contact Message';	
+    $mail->addAddress($_POST['email'], $_POST['name'] ?? 'Customer');
 
+    // Optional BCC
+    $mail->addBCC('devendrk79@gmail.com', 'Digikolorz');
+    $mail->addBCC('devendrk79@gmail.com', 'Lumina Holidays');
 
-
-   // Always set content-type when sending HTML email
-    $mail->add_message($_POST['name'], 'Name');
-    $mail->add_message($_POST['email'], 'Email');
-    $mail->add_message($_POST['message'], 'Message', 10);
-    //Content
-    $mail->isHTML(true); 
-	  // Set email format to HTML
+    // Subject
     $mail->Subject = "Lumina Holidays's Booking Desk";
-    $message = '<div style="margin-bottom:10px;"><b>Dear Customer</b>,</div>' ; 
-    $mail->Body    = $message;
-   // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-    $mail->send();
 
+    // Compose HTML email body
+    $name = $_POST['name'] ?? 'No name provided';
+    $email = $_POST['email'] ?? 'No email provided';
+    $messageText = $_POST['message'] ?? 'No message provided';
+
+    $body = "
+        <div style='font-family:Arial, sans-serif;'>
+            <h3>New Booking Inquiry</h3>
+            <p><strong>Name:</strong> {$name}</p>
+            <p><strong>Email:</strong> {$email}</p>
+            <p><strong>Message:</strong><br>{$messageText}</p>
+        </div>
+    ";
+
+    $mail->isHTML(true);
+    $mail->Body = $body;
+
+    // Send email
+    $mail->send();
+    echo "Message has been sent successfully!";
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
 ?>
+
+
+
 
 
 
