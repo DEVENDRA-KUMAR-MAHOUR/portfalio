@@ -41,6 +41,7 @@
 
 
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 require '../assets/vendor/php-email-form/PHPMailer/src/Exception.php';
@@ -48,9 +49,10 @@ require '../assets/vendor/php-email-form/PHPMailer/src/PHPMailer.php';
 require '../assets/vendor/php-email-form/PHPMailer/src/SMTP.php';
 
 $mail = new PHPMailer(true);
-
+$mail->ajax = true;
 try {
     // SMTP configuration
+   
     $mail->isSMTP();
     $mail->Host       = 'smtp.gmail.com';
     $mail->SMTPAuth   = true;
@@ -60,7 +62,7 @@ try {
     $mail->Port       = 465;
 
     // Sender and recipient
-    $mail->setFrom('devendrk79@gmail.com', 'Lumina Holidays');
+    $mail->setFrom('devendrk79@gmail.com', 'My Desk');
     $mail->addAddress($_POST['email'], $_POST['name'] ?? 'Customer');
 
     // Optional BCC
@@ -68,7 +70,7 @@ try {
     $mail->addBCC('devendrk79@gmail.com', 'Lumina Holidays');
 
     // Subject
-    $mail->Subject = "Lumina Holidays's Booking Desk";
+    $mail->Subject = "I am Sofware Engineer!";
 
     // Compose HTML email body
     $name = $_POST['name'] ?? 'No name provided';
@@ -77,7 +79,7 @@ try {
 
     $body = "
         <div style='font-family:Arial, sans-serif;'>
-            <h3>New Booking Inquiry</h3>
+            <h3>New Equery</h3>
             <p><strong>Name:</strong> {$name}</p>
             <p><strong>Email:</strong> {$email}</p>
             <p><strong>Message:</strong><br>{$messageText}</p>
@@ -88,8 +90,8 @@ try {
     $mail->Body = $body;
 
     // Send email
-    $mail->send();
-    echo "Message has been sent successfully!";
+    echo  $mail->send();
+    // echo "Message has been sent successfully!";
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
