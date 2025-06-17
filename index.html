@@ -26,6 +26,8 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+<!-- Font Awesome CDN (Free) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-yH/aXJ2o+DlLz6FeUeH4p1KlRwTSz3pXeHE0CK8CakTx7g5cH9TUnE+F+TCceKk3Nd3zVP6OZBQAxqOLaNRcVA==" crossorigin="anonymous
 
   <!-- =======================================================
   * Template Name: iPortfolio
@@ -52,10 +54,10 @@
     </a>
 
     <div class="social-links text-center">
-      <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
-      <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-      <a href="https://www.instagram.com/kori_devendra_8218/" class="instagram"><i class="bi bi-instagram"></i></a>
-      <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
+      <!-- <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a> -->
+      <a href="https://www.facebook.com/devendera.mahour/" class="facebook"><i class="bi bi-facebook"></i></a>
+      <a href="https://www.instagram.com/kori_devendra_8218/" class="instagram" ><i class="bi bi-instagram"></i></a>
+      <a href="https://teams.live.com/l/invite/FEAFrcvAw-cgavrUgE" class="google-plus"><i class="bi bi-skype"></i></a>
       <a href="https://www.linkedin.com/in/devendra-kumar-mahour-a11286199?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="linkedin"><i class="bi bi-linkedin"></i></a>
     </div>
 
@@ -63,7 +65,8 @@
       <ul>
         <li><a href="#hero" class="active"><i class="bi bi-house navicon"></i>Home</a></li>
         <li><a href="#about"><i class="bi bi-person navicon"></i> About</a></li>
-        <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i> Resume</a></li>
+        <li><a href="#" onclick="showResumeModal()"><i class="bi bi-file-earmark-text navicon"></i> Resume</a></li>
+        <!-- <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i> Resume</a></li> -->
         <li><a href="#portfolio"><i class="bi bi-images navicon"></i> Portfolio</a></li>
         <li><a href="#services"><i class="bi bi-hdd-stack navicon"></i> Services</a></li>
         <li class="dropdown"><a href="#"><i class="bi bi-menu-button navicon"></i> <span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
@@ -784,6 +787,20 @@
     </section><!-- /Contact Section -->
 
   </main>
+<div id="resumeModal" style="display:none;">
+  <h2>My Resume</h2>
+  <p>...your resume content here...</p>
+  <button onclick="closeResumeModal()">Close</button>
+</div>
+
+<script>
+  function showResumeModal() {
+    document.getElementById('resumeModal').style.display = 'block';
+  }
+  function closeResumeModal() {
+    document.getElementById('resumeModal').style.display = 'none';
+  }
+</script>
 
   <a href="https://wa.me/+917900890876?text=Hii%20Devendra!" class="whats-app-btn" target="blank">
     <i class="fa-brands fa-whatsapp"></i>
